@@ -7,7 +7,7 @@
 
 ---
 
-## 1. Arquitectura Geral
+## 1. Arquitetura Geral
 
 O compilador está organizado em cinco fases sequenciais:
 
@@ -45,28 +45,6 @@ Código Fortran 77
 └─────────────────┘
 ```
 
-A estrutura de directórios é:
-
-```
-fortran77/
-├── compiler.py          # ponto de entrada (CLI)
-├── run_tests.py         # runner de testes automáticos
-├── src/
-│   ├── lexer/
-│   │   └── fortran77_lexer.py
-│   ├── parser/
-│   │   ├── ast_nodes.py
-│   │   └── fortran77_parser.py
-│   ├── semantic/
-│   │   └── semantic.py
-│   └── codegen/
-│       └── codegen.py
-├── vm/
-│   └── vm.py
-└── tests/
-    └── programs/        # os 5 exemplos do enunciado + inputs
-```
-
 ---
 
 ## 2. Formato de Colunas
@@ -86,9 +64,9 @@ Optámos por suportar o **formato de colunas fixas** (ANSI X3.9-1978), que é o 
 O compilador também aceita comentários inline com `!` (fora de strings) e suporta formato livre via flag `--free-form`.
 
 O pré-processamento é feito antes do lexer, resolvendo:
-- Labels → injectados como tokens `LABEL` artificiais
-- Linhas de continuação → concatenadas ao statement anterior
-- Comentários → removidos antes da tokenização
+- Labels -> injetados como tokens `LABEL` artificiais
+- Linhas de continuação -> concatenadas ao statement anterior
+- Comentários -> removidos antes da tokenização
 
 ---
 

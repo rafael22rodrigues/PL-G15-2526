@@ -1,7 +1,7 @@
 """
 compiler.py
 Ponto de entrada do compilador Fortran 77.
-Orquestra: Lexer → Parser → Semântica → CodeGen → VM
+Orquestra: Lexer -> Parser -> Semântica -> CodeGen -> VM
 """
 
 import sys
@@ -27,14 +27,14 @@ def compile_source(source: str, use_fixed=True, verbose=False, run=False,
     """
     errors = []
 
-    # ── 1. PRÉ-PROCESSAMENTO + ANÁLISE LÉXICA ──────────────────────────
+    #  1. PRÉ-PROCESSAMENTO + ANÁLISE LÉXICA
     if verbose:
         print("\n" + "="*60)
         print("FASE 1: ANÁLISE LÉXICA")
         print("="*60)
         analisar(source, use_fixed=use_fixed)
 
-    # ── 2. ANÁLISE SINTÁTICA ────────────────────────────────────────────
+    #  2. ANÁLISE SINTÁTICA
     if verbose:
         print("\n" + "="*60)
         print("FASE 2: ANÁLISE SINTÁTICA")
@@ -48,7 +48,7 @@ def compile_source(source: str, use_fixed=True, verbose=False, run=False,
     if verbose:
         print(ast)
 
-    # ── 3. ANÁLISE SEMÂNTICA ─────────────────────────────────────────────
+    #  3. ANÁLISE SEMÂNTICA
     if verbose:
         print("\n" + "="*60)
         print("FASE 3: ANÁLISE SEMÂNTICA")
@@ -63,7 +63,7 @@ def compile_source(source: str, use_fixed=True, verbose=False, run=False,
         for e in sem_errors:
             print(e)
 
-    # ── 4. GERAÇÃO DE CÓDIGO ─────────────────────────────────────────────
+    # 4. GERAÇÃO DE CÓDIGO
     if verbose:
         print("\n" + "="*60)
         print("FASE 4: GERAÇÃO DE CÓDIGO VM")
@@ -75,14 +75,14 @@ def compile_source(source: str, use_fixed=True, verbose=False, run=False,
     if verbose:
         print_code(code)
 
-    # ── 5. GUARDAR CÓDIGO VM ──────────────────────────────────────────────
+    # 5. GUARDAR CÓDIGO VM
     if output_vm_file:
         vm_text = code_to_text(code)
         with open(output_vm_file, 'w') as f:
             f.write(vm_text)
         print(f"[COMPILADOR] Código VM escrito em: {output_vm_file}")
 
-    # ── 6. EXECUÇÃO NA VM ─────────────────────────────────────────────────
+    # 6. EXECUÇÃO NA VM
     if run:
         if verbose:
             print("\n" + "="*60)
@@ -129,25 +129,25 @@ Exemplos:
 
     use_fixed = not args.free_form
 
-    # ── Modo léxico apenas ───
+    # Modo léxico apenas
     if args.lex_only:
         analisar(source, use_fixed=use_fixed)
         sys.exit(0)
 
-    # ── Modo parser apenas ───
+    # Modo parser apenas
     if args.parse_only:
         ast = parse(source, use_fixed=use_fixed)
         if ast:
             print(ast)
         sys.exit(0)
 
-    # ── Input para VM ───
+    # Input para VM
     input_data = None
     if args.input:
         with open(args.input, 'r') as f:
             input_data = [line.strip() for line in f if line.strip()]
 
-    # ── Compilação completa ───
+    # Compilação completa
     code, errors = compile_source(
         source,
         use_fixed=use_fixed,
