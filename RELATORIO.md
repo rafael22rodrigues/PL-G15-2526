@@ -36,7 +36,7 @@ Código Fortran 77
          │ AST anotada + tabela de símbolos
          ▼
 ┌─────────────────┐
-│ Geração de Código│  src/codegen/codegen.py
+│Geração de Código│  src/codegen/codegen.py
 └────────┬────────┘
          │ lista de instruções VM
          ▼
@@ -261,9 +261,5 @@ Foram implementados testes para todos os exemplos do enunciado:
 | `primo.f77` | `4` | `nao e um numero primo` |
 | `somaarr.f77` | `10 20 30 40 50` | `150` |
 | `conversor.f77` | `10` | `BASE 2: 1010` |
-
----
-
-## 10. Dificuldades Encontradas
 
 ---
