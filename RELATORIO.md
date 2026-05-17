@@ -11,39 +11,7 @@
 
 O compilador está organizado em cinco fases sequenciais:
 
-```
-Código Fortran 77
-       │
-       ▼
-┌─────────────────┐
-│ Pré-processador │  (format fixo/livre, labels, continuações)
-└────────┬────────┘
-         │ lista de (label, statement)
-         ▼
-┌─────────────────┐
-│  Análise Léxica │  src/lexer/fortran77_lexer.py   (ply.lex)
-└────────┬────────┘
-         │ stream de tokens com LABEL injectado
-         ▼
-┌──────────────────┐
-│ Análise Sintática│  src/parser/fortran77_parser.py  (ply.yacc)
-└────────┬─────────┘
-         │ AST
-         ▼
-┌──────────────────┐
-│ Análise Semântica│  src/semantic/semantic.py
-└────────┬─────────┘
-         │ AST anotada + tabela de símbolos
-         ▼
-┌─────────────────┐
-│Geração de Código│  src/codegen/codegen.py
-└────────┬────────┘
-         │ lista de instruções VM
-         ▼
-┌─────────────────┐
-│  Máquina Virtual│  vm/vm.py
-└─────────────────┘
-```
+![Fases do compilador](./fases.jpg)
 
 ---
 
